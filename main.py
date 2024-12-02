@@ -9,7 +9,7 @@ def generate_dataset(size, ships):
     grid = [["-" for _ in range(size)] for _ in range(size)]
     ship_sizes = ships
 
-    # Example of a fixed placement pattern
+    
     placements = [
         (0, 0, "horizontal", 2),  # Place a 2-cell ship at the top left, horizontal
         (2, 2, "vertical", 3),    # Place a 3-cell ship starting at (2, 2), vertical
@@ -26,12 +26,12 @@ def generate_dataset(size, ships):
 
     return grid, ship_sizes
 
-# Example usage:
+
 grid, ship_sizes = generate_dataset(5, [2, 3, 1])
 for row in grid:
     print(" ".join(row))
 
-# Define datasets
+
 datasets = [
     {"size": 5, "ships": [2, 3]},       # Small dataset for exact algorithm
     {"size": 10, "ships": [2, 3, 4]},  # Medium dataset
