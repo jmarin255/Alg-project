@@ -10,8 +10,10 @@ def update_probabilities(grid, hits, misses):
 def greedy_algorithm(grid, ships, hits, misses):
     probabilities = update_probabilities(grid, hits, misses)
     moves = 0
+    
     while any("S" in row for row in grid):  # Continue until all ships are sunk
         max_prob = max(max(row) for row in probabilities)
+        
         for i in range(len(grid)):
             for j in range(len(grid)):
                 if probabilities[i][j] == max_prob:
@@ -23,5 +25,12 @@ def greedy_algorithm(grid, ships, hits, misses):
                         grid[i][j] = "M"  # Miss
                     moves += 1
                     probabilities = update_probabilities(grid, hits, misses)
-                    break
+
+                    # Stop if there are no more unhit ships left
+                    if not any("S" in row for row in grid):
+                        break  # Break the inner loop
+            else:
+                continue  # Only executed if the inner loop did not break
+            break  # Break the outer loop if the inner loop was broken
+
     return moves
