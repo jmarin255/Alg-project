@@ -1,5 +1,5 @@
 def is_valid_placement(grid, row, col, size, direction):
-    """Check if a ship of given size and direction can be placed at (row, col)."""
+    #Check if a ship of given size and direction can be placed at (row, col).
     if direction == "horizontal":
         if col + size > len(grid):  # Check out-of-bounds
             return False
@@ -15,18 +15,11 @@ def is_valid_placement(grid, row, col, size, direction):
     return True
 
 
-def place_ship(grid, row, col, size, direction):
-    """Place a ship on the grid."""
-    if direction == "horizontal":
-        for i in range(size):
-            grid[row][col + i] = "S"
-    elif direction == "vertical":
-        for i in range(size):
-            grid[row + i][col] = "S"
+
 
 
 def remove_ship(grid, row, col, size, direction):
-    """Remove a ship from the grid."""
+    #Remove a ship from the grid.
     if direction == "horizontal":
         for i in range(size):
             grid[row][col + i] = "-"
@@ -36,7 +29,7 @@ def remove_ship(grid, row, col, size, direction):
 
 
 def backtrack(grid, ships):
-    """Recursive backtracking function to place ships."""
+    #Recursive backtracking function to place ships.
     if not ships:  # Base case: All ships are placed successfully
         return True
 
@@ -45,7 +38,6 @@ def backtrack(grid, ships):
         for col in range(len(grid)):
             for direction in ["horizontal", "vertical"]:
                 if is_valid_placement(grid, row, col, size, direction):
-                    place_ship(grid, row, col, size, direction)
                     if backtrack(grid, ships[1:]):  # Recur for the remaining ships
                         return True
                     remove_ship(grid, row, col, size, direction)  # Backtrack
@@ -54,7 +46,7 @@ def backtrack(grid, ships):
 
 
 def exact_algorithm(grid, ships, hits, misses):
-    """Main function for the exact algorithm using backtracking."""
+    #Main function for the exact algorithm using backtracking.
     moves = 0
     
     # Start the backtracking process
